@@ -69,12 +69,12 @@ public class LoginActivity extends AppCompatActivity {
 
         auth.createUserWithEmailAndPassword(email, pass)
                 .addOnSuccessListener(r -> {
-                    Toast.makeText(this, "Account created!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Signup failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Signup Failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
                 );
     }
 }
