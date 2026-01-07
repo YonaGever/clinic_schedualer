@@ -16,7 +16,6 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <!-- HEADER BAR (does NOT intercept touches) -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/headerBar"
             android:layout_width="match_parent"
@@ -48,17 +47,25 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+            <ImageButton
+                android:id="@+id/btnUpcoming"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_list"
+                android:contentDescription="Upcoming"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnSignout"
+                android:layout_marginEnd="12dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- CalendarView MUST be wrap_content, not match_parent -->
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
     </LinearLayout>
-
-    <!-- ===== BOTTOM HALF: HOURLY TASKS SECTION ===== -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

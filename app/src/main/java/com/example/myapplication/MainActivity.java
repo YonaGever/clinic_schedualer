@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         normalizeSelectedDate();
         updateSelectedDateLabel();
-        loadDayFromFirestore();
+        //loadDayFromFirestore();
 
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
@@ -67,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
+        });
+
+        ImageButton upcomingBtn = findViewById(R.id.btnUpcoming);
+        upcomingBtn.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, UpcomingActivity.class));
         });
 
         // Handle date changes
@@ -193,9 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // FIRESTORE: SAVE SLOT (works for new and existing documents)
-    // -------------------------------------------------------------------------
+
     private void saveSlotToFirestore(String time, String task) {
         String dateId = dateIdFormat.format(selectedDate.getTime());
 
@@ -221,9 +224,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // -------------------------------------------------------------------------
-    // FIRESTORE: DELETE SLOT
-    // -------------------------------------------------------------------------
+
     private void deleteSlotFromFirestore(String time) {
         String dateId = dateIdFormat.format(selectedDate.getTime());
 
