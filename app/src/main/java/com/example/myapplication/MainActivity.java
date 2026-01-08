@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
-    // Stores the loaded tasks for the selected day
     private Map<String, String> loadedSlots = new HashMap<>();
 
 
@@ -97,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         tvSelectedDate.setText("Selected: " + dateFormatUI.format(selectedDate.getTime()));
     }
 
-    // -------------------------------------------------------------------------
     // FIRESTORE: LOAD DAY (with logs)
     private void loadDayFromFirestore() {
         String dateId = dateIdFormat.format(selectedDate.getTime());
@@ -156,13 +154,13 @@ public class MainActivity extends AppCompatActivity {
             hourLabel.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
             EditText taskInput = new EditText(this);
-            taskInput.setHint("Add task");
+            taskInput.setHint("Add appointment");
             taskInput.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
 
             if (loadedSlots.containsKey(timeStr)) {
                 String taskValue = loadedSlots.get(timeStr);
                 taskInput.setText(taskValue);
-                Log.d("UI", "Setting task for " + timeStr + ": " + taskValue);
+                Log.d("UI", "Setting appointment for " + timeStr + ": " + taskValue);
             }
 
             ImageView saveBtn = new ImageView(this);
