@@ -10,10 +10,11 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+//firebase libs
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.*;
-
+//time libs
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private SimpleDateFormat dateIdFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     private FirebaseFirestore db;
-
+    //save slot key hash
     private Map<String, String> loadedSlots = new HashMap<>();
 
 
@@ -51,16 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
         normalizeSelectedDate();
         updateSelectedDateLabel();
-        //loadDayFromFirestore();
 
-
+        //check if loged in - remember me
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
             return;
         }
-        ImageButton signoutBtn = findViewById(R.id.btnSignout);
 
+        ImageButton signoutBtn = findViewById(R.id.btnSignout);
 
         signoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ImageButton upcomingBtn = findViewById(R.id.btnUpcoming);
+
         upcomingBtn.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, UpcomingActivity.class));
         });
@@ -82,9 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Normalize date time to midnight to avoid timezone mismatches
-     */
+
     private void normalizeSelectedDate() {
         selectedDate.set(Calendar.HOUR_OF_DAY, 0);
         selectedDate.set(Calendar.MINUTE, 0);
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         tvSelectedDate.setText("Selected: " + dateFormatUI.format(selectedDate.getTime()));
     }
 
-    // FIRESTORE: LOAD DAY (with logs)
+    // FIRESTORE: LOAD DAY
     private void loadDayFromFirestore() {
         String dateId = dateIdFormat.format(selectedDate.getTime());
 
@@ -130,9 +129,8 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    // -------------------------------------------------------------------------
-    // BUILD FULL HOUR SLOTS UI (with logs)
-    // -------------------------------------------------------------------------
+
+    // BUILD FULL HOUR SLOTS UI
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void generateHourSlots() {
         hourSlotsContainer.removeAllViews();
