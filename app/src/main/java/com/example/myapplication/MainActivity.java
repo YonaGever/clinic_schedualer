@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private SimpleDateFormat dateIdFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     private FirebaseFirestore db;
-    //save slot key hash
+    //save slot key hash map
     private Map<String, String> loadedSlots = new HashMap<>();
 
 

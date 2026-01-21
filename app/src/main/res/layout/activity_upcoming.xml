@@ -5,17 +5,39 @@
     android:orientation="vertical"
     android:padding="12dp">
 
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <!-- שורת כותרת + כפתור חזרה -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="התורים שלי לשבוע הקרוב"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+S
+        <!-- כפתור חזרה -->
+        <ImageButton
+            android:id="@+id/btnBackToSchedule"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back" />
 
 
+
+
+
+        <!-- כותרת -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="התורים שלי לשבוע הקרוב"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- כותרות הטבלה -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +66,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
+    <!-- רשימת התורים -->
     <ListView
         android:id="@+id/listUpcoming"
         android:layout_width="match_parent"
