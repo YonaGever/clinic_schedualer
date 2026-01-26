@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +18,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin, btnSignup;
     private FirebaseAuth auth;
+    //private ProgressBar loginSpinner;
+    private FrameLayout spinnerOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +38,19 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignup = findViewById(R.id.btnSignup);
+        spinnerOverlay = findViewById(R.id.loadingOverlay);
+
+        //loginSpinner = findViewById(R.id.loginSpinner);
 
         btnLogin.setOnClickListener(v -> login());
         btnSignup.setOnClickListener(v -> signup());
     }
 
     private void login() {
+
+        spinnerOverlay.setVisibility(View.VISIBLE);
+        btnLogin.setEnabled(false);
+
         String email = etEmail.getText().toString().trim();
         String pass = etPassword.getText().toString().trim();
 
@@ -55,10 +67,18 @@ public class LoginActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Login failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                );
+                )
+                .addOnFailureListener(e -> {
+                    spinnerOverlay.setVisibility(View.GONE);
+                    btnLogin.setEnabled(true);
+                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void signup() {
+        spinnerOverlay.setVisibility(View.VISIBLE);
+        btnLogin.setEnabled(false);
+
         String email = etEmail.getText().toString().trim();
         String pass = etPassword.getText().toString().trim();
 
@@ -75,6 +95,11 @@ public class LoginActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Signup Failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                );
+                )
+                .addOnFailureListener(e -> {
+                    spinnerOverlay.setVisibility(View.GONE);
+                    btnLogin.setEnabled(true);
+                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                });
     }
 }

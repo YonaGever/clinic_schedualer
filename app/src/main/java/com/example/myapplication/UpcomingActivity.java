@@ -72,7 +72,7 @@ public class UpcomingActivity extends AppCompatActivity {
                             for (String time : times) {
                                 String task = String.valueOf(slots.get(time)).trim();
                                 if (!task.isEmpty()) {
-                                    rows.add(new UpcomingRow(dateId, time, task));
+                                    rows.add(new UpcomingRow(dateId, time, task.replace("text=","").replace("is_alert=","").replace("true","התרעה").replace("false","")));
                                 }
                             }
                         }
